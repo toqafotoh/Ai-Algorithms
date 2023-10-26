@@ -29,9 +29,26 @@ def ValidPlacement(board,row, col,number):
         if board[i][col] == number and row !=i:
             return False 
         #check for the column
+    
+    #and then check for the square
+    #it has 6 squares , 3 rows and 3 cols
+    # 0,1,2 rows and 0,1,2 cols 
+    # so to check which square we gonna devide //3
 
+    square_row_i = row //3
+    square_col_i = col//3
 
+    # what is the realtion between the index of the row and it's elements
+    # row is in range square_row_i*3 to square_row_i*3 + 2 (try it with your hands)
+    #oops i found that the column is the same 🙈
 
+    for s_row in range (square_row_i*3,square_row_i*3 + 3):
+        for s_col in range (square_col_i*3 , square_col_i*3 + 3):
+            if board[s_row][s_col] == number and (s_col!=col and s_row !=row):
+                return False 
+    # if you went through all of these loops and you didn't return false 
+    #so it's a vaild position
+    return True 
 def solve(row, col):
     if col == board[row].length:
 
