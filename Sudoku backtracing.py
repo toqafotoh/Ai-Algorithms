@@ -9,10 +9,14 @@ board = [
     [1,2,0,0,0,7,4,0,0],
     [0,4,9,2,0,6,0,0,7]
 ]
-
+def find_empty(board):
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            if board[row][col]==0:
+                return(row,col)
+            
 def solve(row, col):
     if col == board[row].length:
-
 
     for i in range(1,10):
         board[row][col]= i
