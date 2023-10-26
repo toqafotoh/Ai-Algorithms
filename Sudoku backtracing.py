@@ -16,7 +16,7 @@ def find_empty(board):
         for col in range(len(board[row])):
             if board[row][col]==0:
                 return row,col 
-            
+    return -1
 # i have 3 rules , the col, the row , the square            
 def ValidPlacement(board,row, col,number):
     for i in range(9):
@@ -49,11 +49,36 @@ def ValidPlacement(board,row, col,number):
     # if you went through all of these loops and you didn't return false 
     #so it's a vaild position
     return True 
-def solve(row, col):
-    if col == board[row].length:
 
+
+def solve(board):
+    if (empty := find_empty(board)) == -1:
+        return True
+    else :
+        row,col = empty
     for i in range(1,10):
-        board[row][col]= i
-        if(ValidPlacement(row,col)): 
-            if(solve(row,col+1,board)):
-                return True;
+        if(ValidPlacement(board, row, col,i)):
+            board[row][col]= i 
+            if(solve(board)):
+                return True
+            board[row][col] =0 
+    return False 
+
+def print_board(board):
+    for i in range(len(board)):
+        if i % 3 == 0 and i != 0:
+            print("- - - - - - - - - - - - - ")
+
+        for j in range(len(board[0])):
+            if j % 3 == 0 and j != 0:
+                print(" | ", end="")
+
+            if j == 8:
+                print(board[i][j])
+            else:
+                print(str(board[i][j]) + " ", end="")
+
+print_board(board)
+print (" \n"*5)
+solve(board)
+print_board(board)
