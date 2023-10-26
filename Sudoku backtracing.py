@@ -9,12 +9,29 @@ board = [
     [1,2,0,0,0,7,4,0,0],
     [0,4,9,2,0,6,0,0,7]
 ]
+
+
 def find_empty(board):
     for row in range(len(board)):
         for col in range(len(board[row])):
             if board[row][col]==0:
-                return(row,col)
+                return row,col 
             
+# i have 3 rules , the col, the row , the square            
+def ValidPlacement(board,row, col,number):
+    for i in range(9):
+        if board[row][i] == number and col !=i:
+            return False 
+        # we check that the whole row dosen't contain
+        # the value that we just inserted, and we skip
+        # our position , make sense ya3ny
+    for i in range (9):
+        if board[i][col] == number and row !=i:
+            return False 
+        #check for the column
+
+
+
 def solve(row, col):
     if col == board[row].length:
 
